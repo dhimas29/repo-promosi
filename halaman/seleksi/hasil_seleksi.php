@@ -94,9 +94,18 @@
                                                 <tr>
                                                     <?php
                                                     $query = mysqli_query($koneksi, "select * from hasil_seleksi where calon_id='$value[id]'");
+                                                    $fet = mysqli_fetch_array($query);
                                                     $row = mysqli_num_rows($query);
                                                     if ($row > 0) {
-                                                        $sql = mysqli_query($koneksi, "UPDATE FROM hasil_seleksi set status = '$value[status]' where calon_id='$value[id]'");
+                                                        $persetujuan = '-';
+                                                        if ($value['status'] == 'Dapat di Promosikan') {
+                                                            if ($fet['persetujuan'] == 'Tidak Disetujui') {
+                                                                $persetujuan = "Menunggu Persetujuan";
+                                                            } else {
+                                                                $persetujuan = $fet['persetujuan'];
+                                                            }
+                                                        }
+                                                        $sql = mysqli_query($koneksi, "UPDATE hasil_seleksi set status = '$value[status]',persetujuan='$persetujuan' where calon_id='$value[id]'");
                                                     } else {
                                                         $persetujuan = '-';
                                                         if ($value['status'] == 'Dapat di Promosikan') {
