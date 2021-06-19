@@ -16,4 +16,3 @@ $data_kriteria = $datas;
 unset($datas);
 
 // echo json_encode($data_kriteria);
- ?>

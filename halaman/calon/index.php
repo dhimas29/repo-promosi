@@ -37,29 +37,61 @@
                                         <?php $x = 1; ?>
                                         <?php if (isset($datas)) : ?>
                                             <?php foreach ($datas as $data) : ?>
-                                                <tr>
-                                                    <td align="center"><?php echo $x++; ?></td>
-                                                    <td><?php echo $data['nip']; ?></td>
-                                                    <td><?php echo $data['nama']; ?></td>
-                                                    <td><?php echo $data['alamat']; ?></td>
-                                                    <td><?php echo $data['no_telp']; ?></td>
-                                                    <td><?php echo $data['email']; ?></td>
-                                                    <td><?php echo $data['divisi']; ?></td>
+                                                <?php
+                                                $query = mysqli_query($koneksi, "SELECT * FROM calon_subkriteria 
+                                                where calon_id = '$data[id]'");
+                                                $cek = mysqli_num_rows($query);
+                                                $kriteria = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM kriteria"));
+                                                if ($cek == $kriteria) { ?>
+                                                    <tr>
+                                                        <td align="center"><?php echo $x++; ?></td>
+                                                        <td><?php echo $data['nip']; ?></td>
+                                                        <td><?php echo $data['nama']; ?></td>
+                                                        <td><?php echo $data['alamat']; ?></td>
+                                                        <td><?php echo $data['no_telp']; ?></td>
+                                                        <td><?php echo $data['email']; ?></td>
+                                                        <td><?php echo $data['divisi']; ?></td>
 
-                                                    <td align="center">
-                                                        <a href="index.php?url=data_calon_lihat&id=<?php echo $data['id'] ?>" class="btn btn-xs btn-info" title="Lihat">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
-                                                        <a href="index.php?url=data_calon_ubah&id=<?php echo $data['id'] ?>" class="btn btn-xs btn-warning" title="Ubah">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </a>
-                                                        <?php if ($_SESSION['level'] == 'superadmin') { ?>
-                                                            <a href="config/calon/proses_hapus.php?&id=<?php echo $data['id'] ?>" class="btn btn-xs btn-danger" title="Hapus" onclick="return confirm('Apakah anda yakin ingin menghapus?')">
-                                                                <i class="fa fa-remove"></i>
+                                                        <td align="center">
+                                                            <a href="index.php?url=data_calon_lihat&id=<?php echo $data['id'] ?>" class="btn btn-xs btn-info" title="Lihat">
+                                                                <i class="fa fa-eye"></i>
                                                             </a>
-                                                        <?php } ?>
-                                                    </td>
-                                                </tr>
+                                                            <a href="index.php?url=data_calon_ubah&id=<?php echo $data['id'] ?>" class="btn btn-xs btn-warning" title="Ubah">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a>
+                                                            <?php if ($_SESSION['level'] == 'superadmin') { ?>
+                                                                <a href="config/calon/proses_hapus.php?&id=<?php echo $data['id'] ?>" class="btn btn-xs btn-danger" title="Hapus" onclick="return confirm('Apakah anda yakin ingin menghapus?')">
+                                                                    <i class="fa fa-remove"></i>
+                                                                </a>
+                                                            <?php } ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php } else { ?>
+                                                    <tr style="background-color: tomato;">
+                                                        <td align="center"><?php echo $x++; ?></td>
+                                                        <td><?php echo $data['nip']; ?></td>
+                                                        <td><?php echo $data['nama']; ?></td>
+                                                        <td><?php echo $data['alamat']; ?></td>
+                                                        <td><?php echo $data['no_telp']; ?></td>
+                                                        <td><?php echo $data['email']; ?></td>
+                                                        <td><?php echo $data['divisi']; ?></td>
+
+                                                        <td align="center">
+                                                            <a href="index.php?url=data_calon_lihat&id=<?php echo $data['id'] ?>" class="btn btn-xs btn-info" title="Lihat">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                            <a href="index.php?url=data_calon_ubah&id=<?php echo $data['id'] ?>" class="btn btn-xs btn-warning" title="Ubah">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a>
+                                                            <?php if ($_SESSION['level'] == 'superadmin') { ?>
+                                                                <a href="config/calon/proses_hapus.php?&id=<?php echo $data['id'] ?>" class="btn btn-xs btn-danger" title="Hapus" onclick="return confirm('Apakah anda yakin ingin menghapus?')">
+                                                                    <i class="fa fa-remove"></i>
+                                                                </a>
+                                                            <?php } ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
+
                                             <?php endforeach; ?>
                                         <?php endif; ?>
                                     </tbody>

@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Sistem Pendukung Keputusan</title>
-
+    <link href="asset/img/logo.png" rel="icon">
     <!-- Bootstrap Core CSS -->
     <link href="asset/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -39,7 +39,8 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Silahkan Login</h3>
+                        <center><img src="asset/img/logo.png" alt="" style="width: 30%;"></center>
+                        <h3 class="panel-title" style="text-align: center;">Silahkan Login</h3>
                     </div>
                     <div class="panel-body">
                         <form action="config/proses_login.php" method="post">

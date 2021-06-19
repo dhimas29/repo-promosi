@@ -257,7 +257,7 @@
                                 </div>
                             </div>
                         <?php endforeach ?>
-
+                        <a href="index.php?url=proses_seleksi" style="color: white;" class="btn btn-md btn-info"><i class="fa fa-undo"> Kembali</i></a>
                     </div>
                 </div>
             </div>

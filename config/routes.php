@@ -49,6 +49,15 @@ if (isset($_GET['url'])) {
 			$include[] = 'halaman/calon/ubah.php';
 			break;
 
+		case 'profile':
+			$req[] = 'config/profile/load_detail.php';
+			$include[] = 'halaman/profile/ubah.php';
+			break;
+		case 'promosi':
+			$req[] = 'config/promosi/load_data.php';
+			$include[] = 'halaman/promosi/index.php';
+			break;
+
 		case 'laporan':
 			$req[] = 'config/laporan/load_data.php';
 			$include[] = 'halaman/laporan/index.php';

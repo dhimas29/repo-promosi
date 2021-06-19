@@ -15,6 +15,7 @@ $lama_kerja = date_diff($tgl1, $tgl2);
 $sub_id = $_POST['sub_id'];
 
 $sql = "INSERT INTO calon (nip,nama,jenis_kelamin,alamat,no_telp,email,divisi,awal_masuk,lama_kerja)VALUES('$nip','$nama','$jenis_kelamin','$alamat','$no_telp','$email','$divisi','$awal_masuk','$lama_kerja->days')";
+$sql2 = mysqli_query($koneksi, "INSERT INTO pengguna (nama,email,username,password,level)VALUES('$nama','$email','$nip','$nip','Karyawan')");
 
 if (mysqli_query($koneksi, $sql)) {
 	$calon_id = $koneksi->insert_id;

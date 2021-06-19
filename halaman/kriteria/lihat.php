@@ -76,11 +76,13 @@
                                                             </tr>
                                                         <?php endif ?>
                                                     <?php endforeach ?>
+
                                                 </tbody>
                                             </table>
                                         </td>
                                     </tr>
                                 </table>
+                                <a href="index.php?url=data_kriteria" style="color: white;" class="btn btn-md btn-info"><i class="fa fa-undo"> Kembali</i></a>
                             </div>
                         </div>
                     </div>

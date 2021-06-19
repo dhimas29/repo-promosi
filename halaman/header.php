@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Sistem Pendukung Keputusan</title>
-
+    <link href="asset/img/logo.png" rel="icon">
     <!-- Bootstrap Core CSS -->
     <link href="asset/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -83,7 +83,7 @@
                 <?php if ($_SESSION['level'] == 'superadmin') : ?>
                     <a class="navbar-brand" href="index.php?url=data_kriteria"><i class="fa fa-table fa-fw"></i> Data Kriteria</a>
                 <?php endif; ?>
-                <?php if ($_SESSION['level'] != 'pimpinan') : ?>
+                <?php if (($_SESSION['level'] != 'pimpinan') && ($_SESSION['level'] != 'Karyawan')) : ?>
                     <a class="navbar-brand" href="index.php?url=data_calon"><i class="fa fa-table fa-fw"></i> Data Pegawai</a>
                 <?php endif; ?>
                 <?php if (($_SESSION['level'] == 'Divisi Engineering') || ($_SESSION['level'] == 'Divisi Purchasing') || ($_SESSION['level'] == 'Divisi Cost Control')) : ?>
@@ -92,14 +92,17 @@
                 <?php if (($_SESSION['level'] == 'superadmin') || ($_SESSION['level'] == 'pimpinan')) : ?>
                     <a class="navbar-brand" href="index.php?url=laporan"><i class="fa fa-edit fa-fw"></i>Laporan</a>
                 <?php endif; ?>
-
+                <?php if (($_SESSION['level'] == 'Karyawan')) : ?>
+                    <a class="navbar-brand" href="index.php?url=profile"><i class="fa fa-edit fa-fw"></i>Profile</a>
+                    <a class="navbar-brand" href="index.php?url=promosi"><i class="fa fa-edit fa-fw"></i>Promosi</a>
+                <?php endif; ?>
                 <!-- /.navbar-header -->
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <?php echo $_SESSION['nama'] ?><i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <!-- <li><a href="index.php?url=pengaturan"><i class="fa fa-user"></i> Profile</a>

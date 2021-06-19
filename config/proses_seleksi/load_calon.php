@@ -8,13 +8,13 @@ $row = mysqli_num_rows($cek);
 
 if ($row > 0) {
 	$hasil = mysqli_query($koneksi, "SELECT distinct calon.* FROM CALON 
-	 JOIN CALON_SUBKRITERIA ON (calon.id=CALON_SUBKRITERIA.calon_id)  
-	 join hasil_seleksi on (calon.id = hasil_seleksi.calon_id)
-	where divisi ='$_POST[session]' and persetujuan !='Disetujui' ");
+	JOIN CALON_SUBKRITERIA ON (calon.id=CALON_SUBKRITERIA.calon_id) 
+	where divisi ='$_POST[session]' 
+	and calon.id not in (select calon_id from hasil_seleksi where persetujuan = 'Disetujui')");
 } else {
 	$hasil = mysqli_query($koneksi, "SELECT distinct calon.* FROM CALON 
 	 JOIN CALON_SUBKRITERIA ON (calon.id=CALON_SUBKRITERIA.calon_id)  
-	where divisi ='$_POST[session]'");
+	where divisi ='$_POST[session]' and ");
 }
 while ($data_row = mysqli_fetch_assoc($hasil)) {
 	$datas['data'][$data_row['id']] = $data_row;
@@ -24,7 +24,9 @@ while ($data_row = mysqli_fetch_assoc($hasil)) {
 	 join KRITERIA ON (KRITERIA.ID=SUBKRITERIA.kriteria_id) 
 	 join calon on (calon.id=calon_subkriteria.calon_id)
 	 join hasil_seleksi on (calon.id = hasil_seleksi.calon_id)
-	WHERE divisi ='$_POST[session]' and persetujuan !='Disetujui' and CALON_SUBKRITERIA.CALON_ID =" . $datas['data'][$data_row['id']]['id']);
+	WHERE divisi ='$_POST[session]' and persetujuan != 'Disetujui' 
+	
+	and CALON_SUBKRITERIA.CALON_ID =" . $datas['data'][$data_row['id']]['id']);
 	$ro = mysqli_num_rows($ce);
 	if ($ro > 0) {
 		$hasil2 = mysqli_query($koneksi, "SELECT KRITERIA.nama, KRITERIA.id, SUBKRITERIA.NAMA AS nama_subkriteria, 
@@ -33,7 +35,7 @@ while ($data_row = mysqli_fetch_assoc($hasil)) {
 	 join KRITERIA ON (KRITERIA.ID=SUBKRITERIA.kriteria_id) 
 	 join calon on (calon.id=calon_subkriteria.calon_id)
 	 join hasil_seleksi on (calon.id = hasil_seleksi.calon_id)
-	WHERE divisi ='$_POST[session]' and persetujuan !='Disetujui' and CALON_SUBKRITERIA.CALON_ID =" . $datas['data'][$data_row['id']]['id']);
+	WHERE divisi ='$_POST[session]' and persetujuan != 'Disetujui' and CALON_SUBKRITERIA.CALON_ID =" . $datas['data'][$data_row['id']]['id']);
 	} else {
 		$hasil2 = mysqli_query($koneksi, "SELECT KRITERIA.nama, KRITERIA.id, SUBKRITERIA.NAMA AS nama_subkriteria, 
 	SUBKRITERIA.BOBOT AS bobot_subkriteria, CALON_SUBKRITERIA.value 
